@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muthu Stanly Joseph — Senior PHP Developer</title>
-<meta name="description" content="Senior PHP Developer · Laravel · CodeIgniter · RESTful APIs · CRM/ERP/E-commerce systems">
+<title>Muthu Stanly — Software Engineerr</title>
+<meta name="description" content="Software Engineer · Laravel · CodeIgniter · WordPress · REST APIs · CRM/ERP/E-commerce systems">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -24,13 +24,15 @@
     --display: 'Orbitron', ui-monospace, monospace;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:100%;}
+  html, body{max-width:100%; overflow-x:hidden;}
   body{
     background:var(--bg);
     color:var(--text);
     font-family:var(--mono);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
     text-shadow: 0 0 12px rgba(243,241,255,0.06);
   }
   body::before{
@@ -63,9 +65,150 @@
   a:hover{text-decoration:underline;}
   :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
 
-  .wrap{max-width:960px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
-  section{padding:72px 0;}
+  /* No-JS fallback */
+  .noscript-notice{
+    display:none;
+    min-height:100vh;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    text-align:center;
+  }
+  .noscript-box{
+    max-width:440px;
+    border:1px solid var(--line);
+    background:var(--surface);
+    border-radius:10px;
+    padding:36px 28px;
+  }
+  .noscript-box h2{
+    font-family:var(--display);
+    font-size:18px;
+    color:var(--accent);
+    margin-bottom:14px;
+  }
+  .noscript-box p{
+    font-family:var(--mono);
+    font-size:13.5px;
+    color:var(--text-muted);
+    line-height:1.6;
+    margin-bottom:16px;
+  }
+  .noscript-box .contact-fallback{
+    font-family:var(--mono);
+    font-size:13px;
+  }
+  .noscript-box .contact-fallback a{display:block; margin-top:6px;}
+
+  .wrap{max-width:100%; margin:0 auto; padding:0 clamp(16px, 4vw, 64px); position:relative; z-index:1;}
+  section{padding:30px 0; scroll-margin-top:35px;}
+  header.hero{scroll-margin-top:78px;}
   @media (max-width:640px){ section{padding:48px 0;} }
+  @media (max-width:400px){
+    .wrap{padding:0 16px;}
+    .metric{padding:18px 12px;}
+    .metric .num{font-size:24px;}
+    .json-panel pre{font-size:11.5px;}
+    .badge{font-size:11.5px; padding:6px 10px;}
+  }
+
+  /* NAV */
+  .site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(4,3,8,0.82);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:100%; margin:0 auto; padding:14px clamp(16px, 4vw, 64px);
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+  }
+  .nav-name{
+    font-family:var(--display);
+    font-size:14px;
+    font-weight:700;
+    color:var(--text);
+    white-space:nowrap;
+    letter-spacing:0.03em;
+    flex-shrink:0;
+  }
+  .nav-name:hover{color:var(--accent); text-decoration:none;}
+  .nav-links{
+    display:flex; gap:22px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    min-width:0;
+  }
+  .nav-links::-webkit-scrollbar{display:none;}
+  .nav-links a{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-muted);
+    white-space:nowrap;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    padding:6px 2px;
+    border-bottom:2px solid transparent;
+    transition:color .15s, border-color .15s;
+  }
+  .nav-links a:hover{color:var(--accent); border-color:var(--accent); text-decoration:none;}
+  .nav-resume{
+    white-space:nowrap;
+    font-size:11.5px;
+    padding:9px 14px;
+    flex-shrink:0;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .nav-toggle{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:36px; height:36px;
+    background:transparent;
+    border:1px solid var(--line);
+    border-radius:6px;
+    color:var(--text);
+    cursor:pointer;
+    flex-shrink:0;
+    transition:color .2s, border-color .2s, transform .4s ease;
+  }
+  .nav-toggle:hover{color:var(--accent); border-color:var(--accent);}
+  .nav-toggle[aria-expanded="true"]{color:var(--accent); border-color:var(--accent);}
+  .nav-drawer{
+    display:none;
+    flex-direction:column;
+    background:var(--surface);
+    border-top:1px solid var(--line);
+    padding:8px 16px 16px;
+  }
+  .nav-drawer.open{display:flex;}
+  .nav-drawer a{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    padding:12px 4px;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-drawer a:hover{color:var(--accent); text-decoration:none;}
+  .nav-resume-mobile{
+    margin-top:14px;
+    justify-content:center;
+    border-bottom:none !important;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  @media (max-width:760px){
+    .nav-inner{padding:12px 16px; gap:10px;}
+    .nav-links, .nav-resume{display:none;}
+    .nav-toggle{display:inline-flex;}
+  }
 
   .eyebrow{
     font-family:var(--display);
@@ -84,23 +227,31 @@
     font-size:19px;
     font-weight:700;
     letter-spacing:0.04em;
-    margin-bottom:32px;
+    margin-bottom:20px;
     color:var(--text);
   }
 
   /* HERO */
   header.hero{
-    padding:80px 0 56px;
+    padding:60px 0 40px;
     border-bottom:1px solid var(--line);
   }
-  .status-line{
+  .status-line-active{
     font-family:var(--mono);
     font-size:12px;
     color:var(--text-muted);
     display:flex; align-items:center; gap:8px;
     margin-bottom:28px;
   }
-  .dot{width:7px; height:7px; border-radius:50%; background:var(--amber); box-shadow:0 0 8px var(--amber); animation:pulse 2s ease-in-out infinite;}
+  .status-line-active > .dot{width:7px; height:7px; border-radius:50%; background:#3DDC5A; box-shadow:0 0 8px #3DDC5A; animation:pulse 1.2s ease-in-out infinite;}
+  .status-line-inactive{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-muted);
+    display:flex; align-items:center; gap:8px;
+    margin-bottom:28px;
+  }
+  .status-line-inactive > .dot{width:7px; height:7px; border-radius:50%; background:var(--amber); box-shadow:0 0 8px var(--amber); animation:pulse 2s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.35;}}
   @media (prefers-reduced-motion: reduce){ .dot{animation:none;} }
 
@@ -286,6 +437,15 @@
   }
   .project h3{font-size:15.5px; margin-bottom:10px;}
   .project p{font-size:13.5px; color:var(--text-muted); flex-grow:1; margin-bottom:14px;}
+  .project ul{font-size:13.5px; color:var(--text-muted); padding-left:18px; flex-grow:1; margin-bottom:14px;}
+  .project ul li{margin-bottom:5px;}
+  .project ul li::marker{color:var(--accent);}
+  .team-size{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--text-muted);
+    margin-bottom:10px;
+  }
   .tags{display:flex; flex-wrap:wrap; gap:6px;}
   .tag{
     font-family:var(--mono);
@@ -305,29 +465,97 @@
 
   /* CONTACT / FOOTER */
   footer{
+    position:relative;
     border-top:1px solid var(--line);
+    background:var(--surface);
     padding:56px 0 40px;
     text-align:center;
+  }
+  footer::before{
+    content:"";
+    position:absolute; top:-1px; left:50%;
+    transform:translateX(-50%);
+    width:140px; height:2px;
+    background:linear-gradient(90deg, transparent, var(--accent), transparent);
+    box-shadow:0 0 10px rgba(79,209,197,0.6);
   }
   footer .prompt{font-family:var(--mono); color:var(--text-muted); font-size:13px; margin-bottom:18px;}
   footer .prompt::before{content:"$ "; color:var(--accent);}
   footer h2{margin-bottom:20px;}
   .contact-links{display:flex; justify-content:center; gap:24px; flex-wrap:wrap; font-family:var(--mono); font-size:14px;}
   footer .fine{margin-top:36px; font-size:12px; color:var(--text-muted);}
+  footer .fine-stack{margin-top:8px; font-family:var(--mono); letter-spacing:0.03em;}
 </style>
 </head>
 <body>
 
+<noscript>
+  <style>
+    .site-nav, .wrap { display: none !important; }
+    .noscript-notice { display: flex !important; }
+  </style>
+  <div class="noscript-notice">
+    <div class="noscript-box">
+      <h2>JavaScript Required</h2>
+      <p>This portfolio needs JavaScript enabled to display its content and animations. Please enable JavaScript in your browser settings and reload the page.</p>
+      <div class="contact-fallback">
+        In the meantime, you can reach Muthu Stanly directly:
+        <a href="mailto:stanlymuthu@gmail.com">stanlymuthu@gmail.com</a>
+        <a href="tel:+917845155383">+91 78451 55383</a>
+        <a href="https://linkedin.com/in/muthu-stanly">linkedin.com/in/muthu-stanly</a>
+      </div>
+    </div>
+  </div>
+</noscript>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="#about" class="nav-name">Muthu Stanly</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#impact">Outcomes</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="btn primary nav-resume" href="Muthu_Stanly_Software Engineer_7Yrs.pdf" download>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+      Resume
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navDrawer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  <div class="nav-drawer" id="navDrawer">
+    <a href="#about">About</a>
+    <a href="#impact">Outcomes</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <a class="btn primary nav-resume-mobile" href="Muthu_Stanly_Software Engineer_7Yrs.pdf" download>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+      Resume
+    </a>
+  </div>
+</nav>
+
 <div class="wrap">
-  <header class="hero">
-    <div class="status-line"><span class="dot"></span> CURRENTLY EMPLOYED · NOT OPEN TO OPPORTUNITIES</div>
+  <header class="hero" id="about">
+    <div class="status-line-active"><span class="dot"></span> Available for opportunities</div>
+    <!--<div class="status-line-inactive"><span class="dot"></span> CURRENTLY EMPLOYED · NOT OPEN TO OPPORTUNITIES</div>-->
     <div class="hero-grid">
       <div>
         <h1 class="hero-name">
           <span id="name-line1" class="type-line"></span><br>
           <span id="name-line2" class="type-line accent"></span><span class="cursor">_</span>
         </h1>
-        <div class="role">Senior PHP Developer · 7+ Years</div>
+        <div class="role">Software Engineer · 7+ Years</div>
         <p class="summary">I build scalable CRM, ERP, and e-commerce systems with Laravel and CodeIgniter — REST APIs, MySQL, and a habit of shaving milliseconds off response times.</p>
         <div class="hero-actions">
           <a class="btn primary" href="mailto:stanlymuthu@gmail.com">Email me</a>
@@ -340,15 +568,18 @@
           <span class="tf"></span><span class="tf"></span><span class="tf"></span>
           <span class="label">profile.json</span>
         </div>
-        <pre><span class="jp">{</span>
-  <span class="jk">"name"</span><span class="jp">:</span> <span class="jv">"Muthu Stanly Joseph"</span><span class="jp">,</span>
-  <span class="jk">"role"</span><span class="jp">:</span> <span class="jv">"Senior PHP Developer"</span><span class="jp">,</span>
-  <span class="jk">"experience_years"</span><span class="jp">:</span> <span class="jv">7</span><span class="jp">,</span>
-  <span class="jk">"stack"</span><span class="jp">:</span> <span class="jp">[</span><span class="jv">"Laravel"</span><span class="jp">,</span> <span class="jv">"CodeIgniter"</span><span class="jp">,</span> <span class="jv">"WordPress"</span><span class="jp">,</span> <span class="jv">"MySQL"</span><span class="jp">]</span><span class="jp">,</span>
-  <span class="jk">"domains"</span><span class="jp">:</span> <span class="jp">[</span><span class="jv">"CRM"</span><span class="jp">,</span> <span class="jv">"ERP"</span><span class="jp">,</span> <span class="jv">"E-commerce"</span><span class="jp">,</span> <span class="jv">"WordPress"</span><span class="jp">]</span><span class="jp">,</span>
-  <span class="jk">"location"</span><span class="jp">:</span> <span class="jv">"Bangalore, IN"</span><span class="jp">,</span>
-  <span class="jk">"status"</span><span class="jp">:</span> <span class="jv">"employed"</span>
-<span class="jp">}</span></pre>
+        <pre>
+          <span class="jp">{</span>
+          <span class="jk">"name"</span><span class="jp">:</span> <span class="jv">"Muthu Stanly J"</span><span class="jp">,</span>
+          <span class="jk">"role"</span><span class="jp">:</span> <span class="jv">"Software Engineer"</span><span class="jp">,</span>
+          <span class="jk">"experience_years"</span><span class="jp">:</span> <span class="jv">7</span><span class="jp">,</span>
+          <span class="jk">"stack"</span><span class="jp">:</span> <span class="jp">[</span><span class="jv">"Laravel"</span><span class="jp">,</span> <span class="jv">"CodeIgniter"</span><span class="jp">,</span> <span class="jv">"WordPress"</span><span class="jp">,</span> <span class="jv">"MySQL"</span><span class="jp">]</span><span class="jp">,</span>
+          <span class="jk">"domains"</span><span class="jp">:</span> <span class="jp">[</span><span class="jv">"CRM"</span><span class="jp">,</span> <span class="jv">"ERP"</span><span class="jp">,</span> <span class="jv">"E-commerce"</span><span class="jp">,</span> <span class="jv">"WordPress"</span><span class="jp">]</span><span class="jp">,</span>
+          <span class="jk">"location"</span><span class="jp">:</span> <span class="jv">"Bangalore, IN"</span><span class="jp">,</span>
+          <span class="jk">"status"</span><span class="jp">:</span> <span class="jv">"open_to_opportunities"</span>
+          <!--<span class="jk">"status"</span><span class="jp">:</span> <span class="jv">"employed"</span>-->
+          <span class="jp">}</span>
+        </pre>
       </div>
     </div>
   </header>
@@ -361,6 +592,10 @@
       <div class="metric"><div class="num">-45%</div><div class="lbl">API response time reduction</div></div>
       <div class="metric"><div class="num">-40%</div><div class="lbl">Page load time (e-commerce platform)</div></div>
       <div class="metric"><div class="num">+35%</div><div class="lbl">Workflow efficiency via automation</div></div>
+      <div class="metric"><div class="num">98%</div><div class="lbl">Client satisfaction</div></div>
+      <div class="metric"><div class="num">+30%</div><div class="lbl">Google API reliability improvement</div></div>
+      <div class="metric"><div class="num">+20%</div><div class="lbl">System stability post PHP upgrade</div></div>
+      <div class="metric"><div class="num">7+</div><div class="lbl">Years of professional experience</div></div>
     </div>
   </section>
 
@@ -388,16 +623,16 @@
         <ul>
           <li>PHP, JavaScript, TypeScript</li>
           <li>Laravel, CodeIgniter</li>
-          <li>HTML, CSS, Bootstrap</li>
+          <li>HTML, CSS, SCSS, Bootstrap</li>
           <li>jQuery, AJAX</li>
         </ul>
       </div>
       <div class="stack-cell">
         <div class="head">Data & Architecture</div>
         <ul>
-          <li>MySQL, SQL</li>
+          <li>MySQL, SQL, PL/SQL</li>
           <li>Normalization, Indexing</li>
-          <li>MVC, OOP, RESTful APIs</li>
+          <li>MVC, OOP, REST APIs</li>
           <li>Agile SDLC</li>
         </ul>
       </div>
@@ -406,15 +641,17 @@
         <ul>
           <li>OAuth, JWT</li>
           <li>Session-based Authentication</li>
+          <li>RBAC (Role-Based Access Control)</li>
           <li>API Security Best Practices</li>
         </ul>
       </div>
       <div class="stack-cell">
-        <div class="head">Tools</div>
+        <div class="head">AI & Tools</div>
         <ul>
           <li>Git, GitHub, GitLab, Bitbucket</li>
-          <li>Postman, Composer</li>
+          <li>Postman, Composer, Mixpanel</li>
           <li>Jira, ClickUp</li>
+          <li>Claude Code AI</li>
         </ul>
       </div>
       <div class="stack-cell">
@@ -430,6 +667,7 @@
         <ul>
           <li>PHPUnit</li>
           <li>Docker</li>
+          <li>React</li>
         </ul>
       </div>
     </div>
@@ -442,21 +680,20 @@
       <div class="job">
         <div class="dates">JUN 2026 — PRESENT</div>
         <h3>Software Engineer</h3>
-        <div class="org">WebMD, Bangalore</div>
+        <div class="org">FindLaw (a unit of WebMD), Bangalore</div>
         <ul>
-          <li>Develop and maintain WordPress applications, including custom plugin development and WordPress-related REST API services.</li>
-          <li>Optimize and enhance WordPress application performance for speed and reliability.</li>
-          <li>Optimize and normalize MySQL databases to improve data integrity and query performance.</li>
-          <li>Collaborate closely with globally distributed teams, coordinating across time zones to keep delivery on track.</li>
+          <li>Enhance, improve, and maintain a portfolio of existing WordPress websites running on a Multisite network, ensuring consistent performance and reliability across the platform.</li>
+          <li>Leverage Claude Code (AI-assisted development) to accelerate code changes, feature enhancements, and broader web application development.</li>
+          <li>Manage source code versioning and collaborative workflows using GitLab.</li>
         </ul>
       </div>
       <div class="job">
         <div class="dates">JAN 2024 — MAY 2026</div>
         <h3>Senior Software Engineer</h3>
-        <div class="org">Zero Gravity Technologies (Alpha Group), Chennai</div>
+        <div class="org">Alpha Group, Chennai</div>
         <ul>
           <li>Architected and maintained a CRM application to streamline client data management and automate business workflows.</li>
-          <li>Built RESTful APIs and integrated third-party services to consolidate multi-source data.</li>
+          <li>Built REST APIs and integrated third-party services to consolidate multi-source data.</li>
           <li>Boosted application performance by 56% and cut API response time by 45% through backend optimization and database tuning.</li>
         </ul>
       </div>
@@ -474,7 +711,7 @@
         <h3>Senior PHP Developer</h3>
         <div class="org">Netensity Information Systems India Pvt. Ltd., Chennai</div>
         <ul>
-          <li>Developed secure RESTful APIs with authentication for reliable data access.</li>
+          <li>Developed secure REST APIs with authentication for reliable data access.</li>
           <li>Resolved long-standing Google API integration issues, improving reliability by 30%.</li>
           <li>Integrated third-party analytics services to track feature usage.</li>
         </ul>
@@ -509,22 +746,89 @@
       <div class="project">
         <h3>CRM for Photography & Event Management</h3>
         <p>Centralized system for client interactions, event bookings, lead tracking, and post-event engagement. Automated Email/SMS/WhatsApp workflows, lifting operational efficiency by 35%.</p>
+        <div class="team-size">Team size: 1</div>
         <div class="tags">
-          <span class="tag">CodeIgniter</span><span class="tag">MySQL</span><span class="tag">REST</span><span class="tag">jQuery</span>
+          <span class="tag">CodeIgniter</span><span class="tag">MySQL</span><span class="tag">REST</span><span class="tag">jQuery</span><span class="tag">AJAX</span><span class="tag">Bootstrap</span>
         </div>
       </div>
       <div class="project">
         <h3>Room Booking & Reservation System</h3>
         <p>Scalable booking platform with real-time availability and end-to-end reservation flow — search, booking, confirmation — improving booking efficiency by 30%.</p>
+        <div class="team-size">Team size: 1</div>
         <div class="tags">
-          <span class="tag">CodeIgniter</span><span class="tag">MySQL</span><span class="tag">AJAX</span>
+          <span class="tag">CodeIgniter</span><span class="tag">MySQL</span><span class="tag">jQuery</span><span class="tag">AJAX</span><span class="tag">Bootstrap</span><span class="tag">Payment Gateway</span>
         </div>
       </div>
       <div class="project">
-        <h3>E-commerce Platform</h3>
+        <h3>E-Commerce Platform</h3>
         <p>Full storefront with product catalog, cart, checkout, and order management, integrating a secure payment gateway with transaction validation.</p>
+        <div class="team-size">Team size: 2</div>
         <div class="tags">
-          <span class="tag">CodeIgniter</span><span class="tag">MySQL</span><span class="tag">Bootstrap</span>
+          <span class="tag">CodeIgniter</span><span class="tag">MySQL</span><span class="tag">jQuery</span><span class="tag">AJAX</span><span class="tag">Bootstrap</span><span class="tag">Payment Gateway</span>
+        </div>
+      </div>
+      <div class="project">
+        <h3>Fintech Application</h3>
+        <p>Extended an existing fintech product with new modules while maintaining data integrity and security. Built and optimized SQL stored procedures for complex financial data processing.</p>
+        <div class="team-size">Team size: 15+</div>
+        <div class="tags">
+          <span class="tag">Core PHP</span><span class="tag">SQL</span><span class="tag">PL/SQL</span><span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="project">
+        <h3>CRM System for Telecommunications</h3>
+        <p>Designed and built a REST API-based CRM using Laravel MVC to support customer data management and business workflows for a telecom client, delivered in an Agile/Jira framework.</p>
+        <div class="team-size">Team size: 10+</div>
+        <div class="tags">
+          <span class="tag">Laravel</span><span class="tag">REST API</span><span class="tag">MySQL</span>
+        </div>
+      </div>
+      <div class="project">
+        <h3>CRM for Moving & Relocation Company</h3>
+        <p>Built Laravel REST API services to extend an existing CRM product, integrated Mixpanel analytics for usage insights, and enhanced CodeIgniter modules and frontend components.</p>
+        <div class="team-size">Team size: 8</div>
+        <div class="tags">
+          <span class="tag">Laravel</span><span class="tag">CodeIgniter</span><span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">Mixpanel</span>
+        </div>
+      </div>
+      <div class="project">
+        <h3>Restaurant Billing Application (Productized)</h3>
+        <p>Full-stack billing app later productized for multiple clients — table management, KOT generation, order tracking, GST/tax compliance, and multi-channel order handling (dine-in, room service, takeaway).</p>
+        <div class="team-size">Team size: 1</div>
+        <div class="tags">
+          <span class="tag">CodeIgniter</span><span class="tag">MySQL</span><span class="tag">jQuery</span><span class="tag">AJAX</span><span class="tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="project">
+        <h3>LMS — Learning Management System</h3>
+        <p>Developed and maintained a centralized Learning Management System (LMS) to manage employee training and learning activities across a company and its multiple sister companies. Implemented role-based access control (RBAC) to provide distinct permissions for administrators, trainers, managers, and employees.</p>
+        </ul>
+        <div class="team-size">Team size: 2</div>
+        <div class="tags">
+          <span class="tag">CodeIgniter</span><span class="tag">MySQL</span><span class="tag">jQuery</span><span class="tag">AJAX</span><span class="tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="project">
+        <h3>Photo Album Selection Portal</h3>
+        <p>Built a customer-facing portal for a photography and event management business, letting clients browse their event photos and select images for album printing. Enabled customers to flag specific photos for editing and pin edit notes to precise regions of each image, communicating exactly what needed retouching.</p>
+        <div class="team-size">Team size: 1</div>
+        <div class="tags">
+          <span class="tag">CodeIgniter</span><span class="tag">MySQL</span><span class="tag">jQuery</span><span class="tag">AJAX</span><span class="tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="project">
+        <h3>WordPress CMS — Multi-Client Solutions</h3>
+        <ul>
+          <li>Built and maintained multiple WooCommerce e-commerce sites across varied product catalogs and checkout flows.</li>
+          <li>Delivered multiple multi-domain WordPress websites, each tailored to its client's branding and content structure.</li>
+          <li>Developed a donation collection plugin with integrated payment gateway support for a church client.</li>
+          <li>Built an OP (outpatient) appointment reservation plugin for a multi-specialty hospital.</li>
+          <li>Created a newsletter subscription plugin for email list management.</li>
+          <li>Designed a customized contact form plugin to match client-specific requirements.</li>
+        </ul>
+        <div class="team-size">Team size: 1</div>
+        <div class="tags">
+          <span class="tag">WordPress</span><span class="tag">WooCommerce</span><span class="tag">Plugin Dev</span><span class="tag">Payment Gateway</span>
         </div>
       </div>
     </div>
@@ -543,7 +847,7 @@
     </div>
   </section>
 
-  <footer>
+  <footer id="contact">
     <div class="prompt">contact --initiate</div>
     <h2 style="display:inline-block;">Let's build something scalable</h2>
     <div class="contact-links">
@@ -551,7 +855,8 @@
       <a href="tel:+917845155383">+91 78451 55383</a>
       <a href="https://linkedin.com/in/muthu-stanly" target="_blank" rel="noopener">linkedin.com/in/muthu-stanly</a>
     </div>
-    <div class="fine">© 2026 Muthu Stanly Joseph. Built with HTML/CSS — hosted free on GitHub Pages.</div>
+    <div class="fine">© 2026 Muthu Stanly. Built with HTML/CSS — hosted free on GitHub Pages.</div>
+    <div class="fine fine-stack">PHP · Laravel · CodeIgniter · REST API · MySQL · CRM & ERP Web Applications</div>
   </footer>
 </div>
 
@@ -561,7 +866,7 @@
   var line1 = document.getElementById('name-line1');
   var line2 = document.getElementById('name-line2');
   var text1 = 'Muthu Stanly';
-  var text2 = 'Joseph';
+  var text2 = 'J';
 
   if(reduceMotion){
     line1.textContent = text1;
@@ -581,12 +886,58 @@
       }
     })();
   }
-
   typeText(line1, text1, 65, function(){
     typeText(line2, text2, 90);
   });
 })();
-</script>
+// Mobile gear-toggle navigation drawer
+(function(){
+  var toggle = document.getElementById('navToggle');
+  var drawer = document.getElementById('navDrawer');
+  if(!toggle || !drawer) return;
 
+  function closeDrawer(){
+    drawer.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  function openDrawer(){
+    drawer.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+
+  toggle.addEventListener('click', function(){
+    var isOpen = drawer.classList.contains('open');
+    if(isOpen){ closeDrawer(); } else { openDrawer(); }
+  });
+
+  drawer.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', closeDrawer);
+  });
+
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 760){ closeDrawer(); }
+  });
+})();
+// Deter casual right-click / view-source / devtools access.
+// Note: this is a UX deterrent only — it cannot fully block viewing
+// of client-side HTML/CSS/JS, since the browser must download that
+// code to render the page.
+(function(){
+  document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+
+  document.addEventListener('keydown', function(e){
+    var k = e.key ? e.key.toUpperCase() : '';
+    var blockCombo =
+      k === 'F12' ||
+      ((e.ctrlKey || e.metaKey) && e.shiftKey && (k === 'I' || k === 'J' || k === 'C')) ||
+      ((e.ctrlKey || e.metaKey) && k === 'U') ||
+      ((e.metaKey) && e.altKey && (k === 'I' || k === 'J'));
+    if(blockCombo){
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  });
+})();
+</script>
 </body>
 </html>
