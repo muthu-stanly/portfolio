@@ -27,7 +27,6 @@ Senior PHP Engineer with 7+ years of experience building scalable CRM, ERP, e-co
 - Robotic/sci-fi font pairing (Orbitron for display text, Share Tech Mono for body/code text)
 - Graceful fallback message shown if JavaScript is disabled in the browser
 - Custom favicon set (favicon.ico, PNGs, Apple touch icon)
-- Downloadable resume (PDF) linked from the navigation bar
 
 ## Tech Stack
 
